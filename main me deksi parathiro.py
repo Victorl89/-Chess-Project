@@ -35,15 +35,26 @@ class ChessboardGUI:
                                          fg='white')
         self.previous_button.pack(side=tk.BOTTOM, padx=30, pady=10)
         if self.moves:
-            self.moves_text.insert(tk.END, self.moves)
+            formatted_moves = self.format_moves(self.moves)
+            self.moves_text.insert(tk.END, formatted_moves)
         self.draw_chessboard()
         # Φόρτωση των εικόνων των πιονιών.
         self.load_images()
 
+    def format_moves(self, moves):
+        moves_list = moves.split()
+        formatted_moves = []
+        for i in range(0, len(moves_list), 2):
+            move_pair = f"{moves_list[i]}"
+            if i + 1 < len(moves_list):
+                move_pair += f"\t\t{moves_list[i + 1]}\n"
+            formatted_moves.append(move_pair)
+        return " ".join(formatted_moves)
+
     # Σχεδίαση της σκακιέρας.
     def draw_chessboard(self):
         # Δημιουργία των τετραγώνων της σκακιέρας και καθορισμός του χρώματός τους.
-        square_size = 130
+        square_size = 120
         for row in range(8):
             for col in range(8):
                 x0, y0 = col * square_size, row * square_size
@@ -58,14 +69,14 @@ class ChessboardGUI:
         board = [
             ["bR1", "bN1", "bB1", "bQ", "bK", "bB2", "bN2", "bR2"],
             ["bp1", "bp2", "bp3", "bp4", "bp5", "bp6", "bp7", "bp8"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
+            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
+            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
+            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
+            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
             ["wp1", "wp2", "wp3", "wp4", "wp5", "wp6", "wp7", "wp8"],
             ["wR1", "wN1", "wB1", "wQ", "wK", "wB2", "wN2", "wR2"],
         ]
-        square_size = 130
+        square_size = 120
         # Φόρτωση των εικόνων από τα αντίστοιχα αρχεία.
         piece_images = {
             "bp1": tk.PhotoImage(file=os.path.join(gdirectory, "bp1.png")),
@@ -173,7 +184,6 @@ class InitialWindow:
         background_image = PhotoImage(file="background_image.png")
         background_label = tk.Label(self.root, image=background_image)
         background_label.place(relwidth=1, relheight=1)
-
         # Προσθήκη εικονιδίου παραθύρου
         image_icon = PhotoImage(file="Icon.png")
         self.root.iconphoto(False, image_icon)
