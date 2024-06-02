@@ -1,8 +1,6 @@
 
 import re
 def read_pgn_file(pgn_text):
-    #with open(filepath, 'r') as file:
-      #  pgn_text = file.read()
 
     moves = []
     in_moves_section = False
