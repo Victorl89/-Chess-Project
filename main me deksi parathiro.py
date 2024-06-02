@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from tkinter import filedialog, messagebox, PhotoImage
 from screeninfo import get_monitors
+import read_pgn as pg
 
 # Καθορίζει τον τρέχοντα κατάλογο για φόρτωση των εικόνων πιο κάτω.
 gdirectory = 'assets'
@@ -11,6 +12,8 @@ class ChessboardGUI:
         self.master = master
         self.moves = moves
         self.master.title("Chessboard")
+        #Aria
+        self.current_move = None
         # Λήψη διαστάσεων της οθόνης του χρήστη
         monitor = get_monitors()[0]
         screen_width = monitor.width
@@ -39,6 +42,11 @@ class ChessboardGUI:
         self.draw_chessboard()
         # Φόρτωση των εικόνων των πιονιών.
         self.load_images()
+        #clean moves Aria
+        if self.moves:
+            self.clean_moves = self.get_clean_moves(self.moves)
+            print(self.clean_moves)
+    
 
     def format_moves(self, moves):
         moves_list = moves.split()
@@ -119,14 +127,30 @@ class ChessboardGUI:
                     self.board_canvas.create_image(x0 + square_size / 2, y0 + square_size / 2,
                                                    image=piece_images[piece])
         tk.mainloop()
+        #Aria
+    def get_clean_moves(self, pgn_text):
+        return pg.read_pgn_file(pgn_text)
 
     def go_next(self):
-        # Λειτουργία για την εμφάνιση της επόμενης κίνησης.
-        pass
+        #Aria
+        # Λειτουργία για την εμφάνιση της επόμενης κίνησης
+        if self.current_move is None:
+            #αν ειναι τπτ θα παρει την τιμη 0 και θα γινει index το στοιχειο 0 τις λιστας
+            self.current_move = 0
+        else:
+            self.current_move += 1
+        if self.current_move >= len(self.moves):
+            print("No next move.")
+            self.current_move = len(self.moves) - 1
+        
 
     def go_previous(self):
+        #Aria
         # Λειτουργία για την εμφάνιση της προηγούμενης κίνησης.
-        pass
+        if self.current_move == 0:
+            print("No previous move.")
+        else:
+            self.current_move -= 1
 
 
 # Κλάση για την επιλογή παιχνιδιού από τα αρχεία PGN.
