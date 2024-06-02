@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, PhotoImage
 from screeninfo import get_monitors
 import read_pgn as pg
-
+#test test
 # Καθορίζει τον τρέχοντα κατάλογο για φόρτωση των εικόνων πιο κάτω.
 gdirectory = 'assets'
 
