@@ -30,7 +30,6 @@ def read_pgn_file(pgn_text):
     # Further split each move pair into individual moves
     final_moves = []
     for move in clean_moves:
-        final_moves.extend(move.strip().split())
-    #ισως εχει προβλημα με κινησεις οπως 'axb5
+        final_moves.extend(move.strip().split()
 
     return final_moves
