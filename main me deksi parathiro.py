@@ -4,8 +4,7 @@ from tkinter import filedialog, messagebox, PhotoImage
 from screeninfo import get_monitors
 
 # Καθορίζει τον τρέχοντα κατάλογο για φόρτωση των εικόνων πιο κάτω.
-gdirectory = ''
-
+gdirectory = 'assets'
 
 class ChessboardGUI:
     def __init__(self, master, moves=None):
@@ -181,7 +180,7 @@ class InitialWindow:
         window_size = 900
         self.root.geometry(f"{window_size}x{window_size}")
         # Προσθήκη εικόνας φόντου.
-        background_image = PhotoImage(file="background_image.png")
+        background_image = PhotoImage(file="assets/background_image.png")
         background_label = tk.Label(self.root, image=background_image)
         background_label.place(relwidth=1, relheight=1)
         # Προσθήκη εικονιδίου παραθύρου
@@ -242,8 +241,7 @@ class InitialWindow:
         self.root.clipboard_clear()
         self.root.clipboard_append(selected)
 
-    @staticmethod
-    def display_pgn_files(folder_path):
+    def display_pgn_files(self, folder_path):
         # Εμφάνιση αρχείων PGN στον επιλεγμένο φάκελο.
         pgn_files = [file for file in os.listdir(folder_path) if file.endswith('.pgn')]
         if pgn_files:
