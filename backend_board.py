@@ -1,15 +1,32 @@
 
 
+import splitmove
+
+#άδεια σκακιέρα
 board = [0] * 8
 for i in range(len(board)):
     board[i] = ["  "] * 8
-def print_board(board):
+
+    #For testing purposes
+'''def print_board(board):
     for i, row in enumerate(board):
         print(8-i, end=": ")
         for j, col in enumerate(row):
             print(col, end=" ")
         print("\n")
-    print(" "* 3 + "a"+" "*2 + "b"+" "*2 + "c"+" "*2 + "d"+" "*2 + "e"+" "*2 + "f"+" "*2 + "g"+" "*2 + "h")
+    print(" "* 3 + "a"+" "*2 + "b"+" "*2 + "c"+" "*2 + "d"+" "*2 + "e"+" "*2 + "f"+" "*2 + "g"+" "*2 + "h")'''''''''
+#ετοιμη σκακιερα 
+'''board = [
+    ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
+    ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
+    ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
+    ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
+    ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
+    ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
+    ['wP', 'wP', 'wP', 'wP', 'wP', '  ', 'wP', 'wP'],
+    ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
+]'''
+
 
 
 white_pieces_map ={
@@ -52,7 +69,7 @@ def put_pieces(board):
         for square in squares:
             x, y=square[0], square[1]
             board[x][y] = piece
-    print(board)
+    
 
 put_pieces(board)
 
@@ -60,30 +77,17 @@ put_pieces(board)
 #when current_turn is 0 ->whites turn only in my program 
 #when current_turn is 1 ->blacks turn
 #self.current_move % 2 == current_turn
-
-curr_turn = 1
-
-while(True):
-    print_board(board)
-    print("")
-
-    curr_player = ""
-    if curr_turn % 2 == 1:
-        curr_player = "White"
-    else:
-        curr_player = "Black"
-    curr_turn += 1
-
-    print(curr_player + "'s turn!")
-    print("")
+def update_board(board, move, curr_turn):
+   
     #εδω θα περνει αντι για input τη συναρτηση priv_next_move πχ ε2
-    starting_square = input("Enter start square: ")
+    test= splitmove.positions_of_pawn(board, move, curr_turn)
+    starting_square = test[0] 
     start_x, start_y = starting_square[0], starting_square[1]
     start_x = col_map[start_x]
     start_y = 8 - int(start_y)
     start_x, start_y = start_y, start_x
     #εδω θα περνει το αντι για input θα περνει το στοιχειο της λιστας moves πχ ε4
-    ending_square = input("Enter end square: ")
+    ending_square = test[1]
     end_x, end_y = ending_square[0], ending_square[1]
     end_x = col_map[end_x]
     end_y = 8 - int(end_y)
@@ -92,3 +96,13 @@ while(True):
     temp= board[start_x][start_y] 
     board[start_x][start_y] = " "
     board[end_x][end_y] = temp
+    return board
+
+#for testing purposes
+def print_board(board):
+    for row in board:
+        print(row)
+curr_turn = 1
+move="e5"
+board= update_board(board, move, curr_turn)
+print_board(board)
