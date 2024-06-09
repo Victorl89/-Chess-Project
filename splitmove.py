@@ -1,14 +1,14 @@
 import re
-board = [
+'''board = [
     ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
     ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
     ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
     ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
     ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
     ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '],
-    ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'],
+    ['wP', 'wP', 'wP', 'wP', 'wP', '  ', 'wP', 'wP'],
     ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
-]
+]'''
 
 
 def split_chess_move(move_str):
@@ -167,12 +167,12 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wN', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bN', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
                 
         #Rook
@@ -182,12 +182,12 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wR',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bR',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
                 
         #Bishop
@@ -197,14 +197,14 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wB', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
                 
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bB', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
-            print(next_move)
+                  
+            
                 
         #Queen
         elif move[0] == 'Q':
@@ -213,14 +213,14 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wQ', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
                 
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bQ', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
-            print(next_move)
+                  
+             
                 
         #King
         elif move[0] == 'K':
@@ -229,14 +229,14 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wK', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
                 
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bK', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
-            print(next_move)
+                  
+               
                
         #pawn
         else:
@@ -244,8 +244,8 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 previous_move = move[0] + row_map[str(int(move[3])+1)]
                 next_move = col_map[move[2]]+row_map[move[3]]
-                print(previous_move)
-                print(next_move)
+                  
+                   
 
                 
 
@@ -253,8 +253,8 @@ def positions_of_pawn(current_board, move, color):
             if color == 1:
                 previous_move = move[0] + row_map[str(int(move[3])-1)]
                 next_move = col_map[move[2]]+row_map[move[3]]
-                print(previous_move)
-                print(next_move)
+                  
+                   
 
 
     # promotion
@@ -265,8 +265,8 @@ def positions_of_pawn(current_board, move, color):
         else:
             previous_move = col_map[move[0]]+row_map[str(int(move[1])-1)]
         next_move = move[3]+col_map[move[0]]+row_map[move[1]]
-        print(previous_move)
-        print(next_move)
+          
+           
 
     # check or mate
     elif is_check_or_mate:
@@ -277,12 +277,12 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wN', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bN', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
                 
         #Rook
@@ -292,12 +292,12 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wR',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bR',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
                 
         #Bishop
@@ -307,15 +307,15 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wB', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
                 print(position)
                 
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bB', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
-            print(next_move)
+                  
+               
                 
         #Queen
         elif move[0] == 'Q':
@@ -324,14 +324,14 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wQ', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
                 
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bQ', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
-            print(next_move)
+                  
+               
                 
         #King
         elif move[0] == 'K':
@@ -340,14 +340,14 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wK', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
                 
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bK', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
-            print(next_move)
+                  
+               
                
         #pawn
         else:
@@ -355,8 +355,8 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 previous_move = move[0] + row_map[str(int(move[2])+1)]
                 next_move = col_map[move[1]]+row_map[move[2]]
-                print(previous_move)
-                print(next_move)
+                  
+                   
 
                 
 
@@ -364,8 +364,8 @@ def positions_of_pawn(current_board, move, color):
             if color == 1:
                 previous_move = move[0] + row_map[str(int(move[2])-1)]
                 next_move = col_map[move[1]]+row_map[move[2]]
-                print(previous_move)
-                print(next_move)
+                  
+                   
 
     # standard
     else:
@@ -376,30 +376,30 @@ def positions_of_pawn(current_board, move, color):
             if color == 0:
                 position = (find_piece_positions(current_board, 'wN',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bN',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             
-            print(next_move)
+               
         # bishop
         elif move[0] == 'B':
             next_move = move[0]+col_map[move[1]]+row_map[move[2]]
             if color == 0:
                 position = (find_piece_positions(current_board, 'wB',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 position = (find_piece_positions(current_board, 'bB',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             
-            print(next_move)
+               
         ## rook
         elif move[0] == 'R':
             
@@ -409,29 +409,29 @@ def positions_of_pawn(current_board, move, color):
         
                 position = (find_piece_positions(current_board, 'wR',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             if color == 1:
                 
                 position = (find_piece_positions(current_board, 'bR',next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
             
-            print(next_move)
+               
         # queen
         elif move[0] == 'Q':
             next_move = move[0]+col_map[move[1]]+row_map[move[2]]
             if color == 0:
                 position = (find_piece_positions(current_board, 'wQ', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
 
             else:
-                position = (find_piece_positions(current_board, 'bQ', next_move))
+                # position = (find_piece_positions(current_board, 'bQ', next_move))
                 previous_move = ", ".join(position)
-                print(previous_move)
+                  
             
-            print(next_move)
+               
         # king
         elif move[0] == 'K':
             next_move = move[0]+col_map[move[1]]+row_map[move[2]]
@@ -439,14 +439,14 @@ def positions_of_pawn(current_board, move, color):
                 position = (find_piece_positions(current_board, 'wK', next_move))
                 previous_move = ", ".join(position)
                 
-                print(previous_move)
-                print(next_move)
+                  
+                   
             else:
                 position = (find_piece_positions(current_board, 'bK', next_move))
                 previous_move = ", ".join(position)
             
-                print(previous_move)
-                print(next_move)
+                  
+                   
         # pawns
         else:
             
@@ -456,27 +456,32 @@ def positions_of_pawn(current_board, move, color):
                     previous_move = col_map[move[0]]+row_map[str(int(move[1])+2)]
 
                 else:
-                    previous_move = col_map[move[0]]+row_map[str(int(move[1])+2)]
                     
                     previous_move = col_map[move[0]]+row_map[str(int(move[1])+1)]
-            else:  # black
-                if move[0]+str(int(move[1])+1) == '  ':
-                    previous_move = col_map[move[0]]+str(int(move[1])+2)
+            elif color==1:  # black
+                if current_board[(int(move[1])-1)][int(move[0])] == '  ':
+                    previous_move = col_map[move[0]]+row_map[str(int(move[1])-2)]
 
                 else:
-                    previous_move = col_map[move[0]]+str(int(move[1])+1)
+                    previous_move = col_map[move[0]]+row_map[str(int(move[1])-1)]
 
             next_move = col_map[move[0]]+row_map[move[1]]
-            print(previous_move)
-            print(next_move)
-    return move_type, move
+              
+    #return the move without QKNRB
+    next_move = next_move.strip("QKNRB")        
+    return previous_move, next_move
 
 
 # Example usage:
-moves = [ "Qh5+", "Bh5", "Bh7", "Bh8"]
+'''moves = [ "Qh5+", "Nc3", "Qh6", "Ba3" ]
 for m in moves:
-    move_type, move_components = positions_of_pawn(board, m, 0)
-    print(f"Move: {m} -> Type: {move_type}, Components: {move_components}")
+    previous_move, next_move = positions_of_pawn(board, m, 0)
+    print(f"Move: {m} -> previous: {previous_move}, next: {next_move}")'''
+
+'''moves_black = ["e5"]
+for m in moves_black:
+    previous_move, next_move = positions_of_pawn(board, m, 1)
+    print(f"Move: {m} -> previous: {previous_move}, next: {next_move}")'''
 
 moves_black = ["Ba6"]
 for m in moves_black:
