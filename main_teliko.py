@@ -71,54 +71,33 @@ class ChessboardGUI:
                 color = "#FFEBCD" if (row + col) % 2 == 0 else "#654321"
                 self.board_canvas.create_rectangle(x0, y0, x1, y1, fill=color)
 
-    def load_images(self):
+        def load_images(self):
         # Ορισμός των πιονιων του σκακιού και φόρτωση των εικόνων τους.
         board = [
             ["bR1", "bN1", "bB1", "bQ", "bK", "bB2", "bN2", "bR2"],
             ["bp1", "bp2", "bp3", "bp4", "bp5", "bp6", "bp7", "bp8"],
-            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
-            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
-            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
-            ["--",  "--",  "--",  "--",  "--",  "--",  "--",  "--"],
+            ["--", "--", "--", "--", "--", "--", "--", "--"],
+            ["--", "--", "--", "--", "--", "--", "--", "--"],
+            ["--", "--", "--", "--", "--", "--", "--", "--"],
+            ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["wp1", "wp2", "wp3", "wp4", "wp5", "wp6", "wp7", "wp8"],
             ["wR1", "wN1", "wB1", "wQ", "wK", "wB2", "wN2", "wR2"],
         ]
-        square_size = 120
         # Φόρτωση των εικόνων από τα αντίστοιχα αρχεία.
-        piece_images = {
-            "bp1": tk.PhotoImage(file=os.path.join(gdirectory, "bp1.png")),
-            "bp2": tk.PhotoImage(file=os.path.join(gdirectory, "bp2.png")),
-            "bp3": tk.PhotoImage(file=os.path.join(gdirectory, "bp3.png")),
-            "bp4": tk.PhotoImage(file=os.path.join(gdirectory, "bp4.png")),
-            "bp5": tk.PhotoImage(file=os.path.join(gdirectory, "bp5.png")),
-            "bp6": tk.PhotoImage(file=os.path.join(gdirectory, "bp6.png")),
-            "bp7": tk.PhotoImage(file=os.path.join(gdirectory, "bp7.png")),
-            "bp8": tk.PhotoImage(file=os.path.join(gdirectory, "bp8.png")),
-            "bR1": tk.PhotoImage(file=os.path.join(gdirectory, "bR1.png")),
-            "bR2": tk.PhotoImage(file=os.path.join(gdirectory, "bR2.png")),
-            "bN1": tk.PhotoImage(file=os.path.join(gdirectory, "bN1.png")),
-            "bN2": tk.PhotoImage(file=os.path.join(gdirectory, "bN2.png")),
-            "bB1": tk.PhotoImage(file=os.path.join(gdirectory, "bB1.png")),
-            "bB2": tk.PhotoImage(file=os.path.join(gdirectory, "bB2.png")),
-            "bQ": tk.PhotoImage(file=os.path.join(gdirectory, "bQ.png")),
-            "bK": tk.PhotoImage(file=os.path.join(gdirectory, "bK.png")),
-            "wp1": tk.PhotoImage(file=os.path.join(gdirectory, "wp1.png")),
-            "wp2": tk.PhotoImage(file=os.path.join(gdirectory, "wp2.png")),
-            "wp3": tk.PhotoImage(file=os.path.join(gdirectory, "wp3.png")),
-            "wp4": tk.PhotoImage(file=os.path.join(gdirectory, "wp4.png")),
-            "wp5": tk.PhotoImage(file=os.path.join(gdirectory, "wp5.png")),
-            "wp6": tk.PhotoImage(file=os.path.join(gdirectory, "wp6.png")),
-            "wp7": tk.PhotoImage(file=os.path.join(gdirectory, "wp7.png")),
-            "wp8": tk.PhotoImage(file=os.path.join(gdirectory, "wp8.png")),
-            "wR1": tk.PhotoImage(file=os.path.join(gdirectory, "wR1.png")),
-            "wR2": tk.PhotoImage(file=os.path.join(gdirectory, "wR2.png")),
-            "wN1": tk.PhotoImage(file=os.path.join(gdirectory, "wN1.png")),
-            "wN2": tk.PhotoImage(file=os.path.join(gdirectory, "wN2.png")),
-            "wB1": tk.PhotoImage(file=os.path.join(gdirectory, "wB1.png")),
-            "wB2": tk.PhotoImage(file=os.path.join(gdirectory, "wB2.png")),
-            "wQ": tk.PhotoImage(file=os.path.join(gdirectory, "wQ.png")),
-            "wK": tk.PhotoImage(file=os.path.join(gdirectory, "wK.png")),
-        }
+        square_size = 120
+        pieces = ["bp1", "bp2", "bp3", "bp4", "bp5", "bp6", "bp7", "bp8",
+                  "bR1", "bR2", "bN1", "bN2", "bB1", "bB2", "bQ", "bK",
+                  "wp1", "wp2", "wp3", "wp4", "wp5", "wp6", "wp7", "wp8",
+                  "wR1", "wR2", "wN1", "wN2", "wB1", "wB2", "wQ", "wK"]
+
+        piece_images = {}
+        base_path = sys._MEIPASS if getattr(sys, 'frozen', False) else os.path.dirname(__file__)
+        for piece in pieces:
+            file_path = os.path.join(base_path, f"{piece}.png")
+            piece_images[piece] = tk.PhotoImage(file=file_path)
+
+        self.piece_images = piece_images  # Save reference to avoid garbage collection
+
         for row in range(8):
             for col in range(8):
                 piece = board[row][col]
@@ -126,7 +105,8 @@ class ChessboardGUI:
                     x0, y0 = col * square_size, row * square_size
                     self.board_canvas.create_image(x0 + square_size / 2, y0 + square_size / 2,
                                                    image=piece_images[piece])
-        tk.mainloop()
+
+
         #Aria
     def get_clean_moves(self, pgn_text):
         return pg.read_pgn_file(pgn_text)
