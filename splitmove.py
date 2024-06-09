@@ -427,7 +427,7 @@ def positions_of_pawn(current_board, move, color):
                   
 
             else:
-                # position = (find_piece_positions(current_board, 'bQ', next_move))
+                position = (find_piece_positions(current_board, 'bQ', next_move))
                 previous_move = ", ".join(position)
                   
             
